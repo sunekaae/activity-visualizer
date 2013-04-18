@@ -1,0 +1,6 @@
+.DS_Store
+openscad/utils/*
+openscad/write/*
+openscad/Letters.dxf 
+
+.env

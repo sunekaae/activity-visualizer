@@ -1,0 +1,46 @@
+<!doctype html>
+%html
+  %head
+    %title Thingiverse Iframe Test App
+    %script{:src => "js/json2.js"}
+    %script{:src => "js/jquery-1.8.2.min.js"}
+    %script{:src => "js/jquery.ba-postmessage.min.js"}
+    %script{:src => "js/tviframesdk.js"}
+    %script{:src => "js/app.js"}
+  %body
+    %div{:style => "float:right;width:50%"}
+      %h3 Access Token
+      %p #{tv.access_token}
+      %h3 User
+      %p{:id => "user"}
+      %h3 Thing
+      %p{:id => "thing"}
+      %h3 File
+      %p{:id => "file"}
+    %h1 Thingiverse Iframe Test App
+    %input{:id=>"message_test", :type=>"button", :value=>"Test Post Message", :onclick=>"TV.sendMessage({cmd: 'echo', params: {foo: 'bar'}}, gotEcho)"}
+    %h2 Dialogs
+    %input{:type=>"button", :value=>"Select File", :onclick=>"TV.dialog('file_select', {thing_id: 12405}, selectedFile)"}
+    %input{:type=>"button", :value=>"Select File (filtered)", :onclick=>"TV.dialog('file_select', {thing_id: 12405, extension: 'stl,obj'}, selectedFile)"}
+    %br/
+    %input{:type=>"button", :value=>"Select My Things", :onclick=>"TV.dialog('thing_select', selectedThing)"}
+    %br/
+    %input{:type=>"button", :value=>"Search Things", :onclick=>"TV.dialog('thing_search', selectedThing)"}
+    %input{:type=>"button", :value=>"Search 'makerbot'", :onclick=>"TV.dialog('thing_search', {q: 'makerbot'}, selectedThing)"}
+    %br/
+    %input{:type=>"button", :value=>"Create a New Thing", :onclick=>"TV.dialog('thing_save', {name: 'Awesome Thing', description: 'Foo Bar', category: 'Model Robots', tags: 'iframe, app', license: 'cc-sa', is_published: 1}, createdThing)"}
+    %input{:type=>"button", :value=>"Edit a Thing", :onclick=>"TV.dialog('thing_save', {id: 12405}, savedThing)"}
+    %h2 API
+    %input{:type=>"button", :value=>"Get Latest Thing", :onclick=>"TV.api('/newest', gotNewest)"}
+    %input{:type=>"button", :value=>"Get Tags", :onclick=>"TV.api('/tags', gotApi)"}
+    %input{:type=>"button", :value=>"Test Absolute URL", :onclick=>"TV.api('http://api.thingiverse.com/things/23338', gotThing)"}
+    :javascript
+      // api_url, target_url, and target are optional - set here for dev environment
+      TV.init({
+        access_token: '#{tv.access_token}',
+        api_url: 'http://api.thingiverse.com',
+        target_url: 'http://www.thingiverse.com',
+        target: parent
+      });
+      
+      TV.api('/users/me', gotUser);

@@ -1,0 +1,26 @@
+%h2 Nike authentication
+%p
+  You need to manually copy/paste your Nike+ access token into the field below.
+  %br
+  You can get your access token from
+  %a{:href=>'http://developer.nike.com/console', :target=>'_blank'}developer.nike.com/console
+  (click "Get My Access Token" after you have logged in)
+
+%p
+  %form{:action=>'redirected', :method=>'GET'}
+    %input{:type=>'hidden', :name=>'access_token', :value=>"#{access_token}"}
+    Access token: 
+    %input{:type=>'text', :name=>'nike_access_token', :size=>'50'}
+    %br (it's an alpha-numeric string of between 25 and 35 characters)
+    %p
+      Optionally, specify the date for a week of activity. (default: 2013-03-25)
+      %br
+      Start date (yyyy-mm-dd): 
+      %input{:type=>'text', :name=>'start_date', :size=>'20'}
+      %br
+      End date (yyyy-mm-dd):
+      %input{:type=>'text', :name=>'end_date', :size=>'20'}
+      %br
+    %input{:type=>'submit', :value=>'Go Ahead!'}
+
+
