@@ -1,5 +1,5 @@
-require_relative '../open_scad_template.rb'
-require_relative '../nikeapi'
+require_relative '../src/open_scad_template.rb'
+require_relative '../src/nikeapi'
 
 #template = Template.new([1],[2])
 #puts template.customizeTemplate
